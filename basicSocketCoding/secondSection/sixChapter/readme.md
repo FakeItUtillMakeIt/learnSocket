@@ -22,6 +22,25 @@
         内核在描述符就绪时发送SIGIO信号通知进程
     异步IO模型：
         告知内核启动某个操作，并让内核在整个操作完成后通知进程，和信号驱动IO不同的是，信号驱动告知何时启动IO操作，异步IO告知IO操作何时完成
-    select函数：
+    select函数：  sixChapter/tcpserv12.cpp sixChapter/tcpcli12.cpp
         select允许进程指示内核等待多个事件中的任何一个发生，并只在有一个或多个事件发生或经历一段指定时间后才唤醒它，
         任何描述符都可以使用select
+        原型：int select(int maxfdp1,fd_set *readset,fd_set* writeset,fd_set* exceptset,const struct timeval* timeout);
+    描述符就绪条件：
+        套接字准备好读：
+            1.套接字接收缓冲区的数据字节数大于等于套接字接收缓冲区 RCV_LOWAT 的大小
+            2.套接字连接的读半关闭(接收了FIN的TCP连接)
+            3.监听套接字的已连接数不为0
+            4.描述符上有一个套接字错误待处理
+        套接字准备好写：
+            1.套接字发送缓冲区的数据字节数大于等于套接字发送缓冲区 SND_LOWAT 的大小
+            2.套接字连接的写半关闭，产生SIGPIPE
+            3.使用非阻塞式connect的套接字已建立连接，或connect以失败告终
+            4.描述符上有一个套接字错误待处理
+        如果一个套接字存在带外数据或仍处于带外标记，那就有异常条件待处理
+    shutdown函数：sixChapter/tcpserv13.cpp sixChapter/tcpcli13.cpp
+        int shutdown(int sockfd,int howto);
+        howto参数:SHUT_RD关闭连接读,SHUT_WR关闭连接写,SHUW_RDWR关闭连接读写
+    
+    tcp回射服务器程序（修订版）: sixChapter/tcpserv14.cpp sixChapter/tcpcli14.cpp
+

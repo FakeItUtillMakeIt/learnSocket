@@ -23,4 +23,6 @@
     tcp_listen例子：secondSection/elevenChapter/daytimetcpserv.cpp
 
     可指定协议的时间获取服务器程序：secondSection/elevenChapter/daytimetcpserv2.cpp
+
+    udp_client函数：secondSection/elevenChapter/udp_client.cpp
     

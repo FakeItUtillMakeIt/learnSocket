@@ -13,7 +13,7 @@
         accept:获取连接fd
         close:关闭
 
-        服务器:socket bind listen
+        服务器:socket bind listen accept
         客户端:socket connect
 
     IPV4数据报能传输的最大字节数为65535，最小传输单元为68字节
